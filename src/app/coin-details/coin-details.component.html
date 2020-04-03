@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-12 col-md-8 offset-md-2 mt-5">
+
+    <div *ngIf="tickers | async; else loading">
+      <div *ngFor="let ticker of tickers | async">
+        <h5>{{ ticker.coin_name }} | {{ ticker.coin_id }}</h5>
+        <ul>
+          <li><strong>Price:</strong> {{ ticker.last_price | currency }}</li>
+          <li><strong>24-Hour Vol:</strong> {{ ticker.volume_24hr | number }}</li>
+          <li><strong>$100 USD:</strong> {{ (100 / ticker.last_price) | number:'1.0-8' }} coins</li>
+          <li><strong>$250 USD:</strong> {{ (250 / ticker.last_price) | number:'1.0-8' }} coins</li>
+          <li><strong>$5000 USD:</strong> {{ (5000 / ticker.last_price) | number:'1.0-8' }} coins</li>
+        </ul>
+      </div>
+    </div>
+
+    <ng-template #loading>
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border text-info" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+</div>
